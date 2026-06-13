@@ -1,0 +1,117 @@
+---
+title: 基于 Quarto 与标准 LaTeX Book 文档类的中文书籍模板
+lang: zh-CN
+format:
+  xbook-cn-pdf:
+    keep-tex: true
+author:
+  - id: xz
+    name: 张鑫
+    affiliations:
+      - name: 东南大学
+        department: 数学学院
+        city: 南京
+        country: 中国
+        postal-code: 211189
+    orcid: 0000-0001-6670-5351
+    email: xzhangseu@seu.edu.cn
+    url: https://math.seu.edu.cn/zx_en/list.htm
+    attributes:
+      corresponding: true
+    bio: |
+      Xin Zhang is a professor at the School of Mathematics, Southeast University.
+      His research interests include stochastic control theory and its applications
+      in finance and insurance.
+  - name: John Doe
+    affiliations:
+      - name: Anonymous University
+    bio: |
+      John Doe is a researcher at Anonymous University.
+abstract: |
+  This document demonstrates how to use Quarto with the standard LaTeX book
+  document class. It produces PDF output suitable for monographs,
+  dissertations, and long-form academic writing.
+keywords: [Quarto, LaTeX, book, Pandoc, template]
+bibliography: bibliography.bib
+date: 2023-06-23
+---
+
+# Introduction {#sec-intro}
+
+This file is a sample book demonstrating Quarto's capabilities with the standard
+LaTeX `book` document class. It supports PDF (via LaTeX) output.
+It is assumed that the reader has a basic working knowledge of stochastic calculus @karatzas1991brownian
+and stochastic control theory @yong1999sch.
+
+::: {#thm-residue .theorem}
+## Residue Theorem
+Let $f$ be analytic in a simply connected domain $D$. Then for any closed contour $\gamma \subset D$,
+$$
+\oint_\gamma f(z)\,dz = 2\pi i \sum_{k} \mathrm{Res}(f, z_k)
+$$
+:::
+
+This template supports standard Quarto cross-references. You can refer to 定理 [@thm-residue] in the text.
+
+# Markdown Basics {#sec-markdown}
+
+The template is built on Quarto and Pandoc, leveraging standard LaTeX tools for PDF output.
+
+## Equations
+
+Inline math: $E = mc^2$. Display math:
+
+$$
+\frac{\partial u}{\partial t} = \alpha \nabla^2 u
+$$
+
+## Theorems and Proofs
+
+::: {#lem-key .lemma}
+## Key Lemma
+If $f$ is continuous on $[a,b]$, then $f$ is integrable on $[a,b]$.
+:::
+
+::: {#cor-easy .corollary}
+## Easy Corollary
+Every continuous function on a closed interval is bounded.
+:::
+
+::: {#def-model .definition}
+## Model Definition
+A stochastic process $\{X_t\}_{t \ge 0}$ is a collection of random variables indexed by time.
+:::
+
+## Lists
+
+1. First item
+2. Second item
+3. Third item
+
+- Bullet one
+- Bullet two
+
+## Tables
+
+| Variable | Description | Unit |
+|-----------|-------------|------|
+| $x$       | Position    | m    |
+| $v$       | Velocity    | m/s  |
+| $a$       | Acceleration| m/s² |
+
+: A sample table {#tbl-sample}
+
+# 参考文献设置
+
+This template uses `natbib` with the `plainnat-doi` bibliography style for author-year citations @karatzas1991brownian.
+
+# 致谢 {-}
+
+This should be a simple paragraph before the References to
+thank those individuals and institutions who have supported
+your work on this book.
+
+[]{.appendix options="An Appendix"}
+
+Use the `[]{.appendix options="An Appendix"}` markup if you have a single appendix.
+Do not use `\section{}` after `\appendix` in LaTeX.

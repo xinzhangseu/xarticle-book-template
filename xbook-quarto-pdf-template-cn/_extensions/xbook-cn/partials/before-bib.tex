@@ -1,0 +1,10 @@
+% Bibliography will be placed here by Pandoc
+% Patch \bibliography to use \bibname (Chinese "参考文献")
+\xpatchcmd{\bibliography}{\chapter{Bibliography}}{\chapter{\bibname}}{}{}
+\let\stdchaptermark\chaptermark
+\renewcommand{\chaptermark}[1]{}
+\makeatletter
+\let\stdmkboth\@mkboth
+\def\@mkboth#1#2{}
+\makeatother
+\markright{}

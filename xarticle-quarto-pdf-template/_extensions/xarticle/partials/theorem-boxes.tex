@@ -1,0 +1,31 @@
+% Theorem boxes — rounded corners, white/transparent background
+\usepackage[most,theorems,skins,breakable]{tcolorbox}
+
+% --- Color definitions ---
+\definecolor{thmframe}{RGB}{120,185,225}
+
+% --- Shared tcolorbox style for theorem-like environments ---
+\tcbset{
+  thmboxstyle/.style={
+    enhanced jigsaw,
+    colback=white,
+    colframe=thmframe,
+    boxrule=0.6pt,
+    arc=4pt,
+    before skip=3pt plus 4pt minus 2pt,
+    after skip=3pt plus 4pt minus 2pt,
+    breakable,
+    left=1pt,
+    right=1pt,
+    top=1pt,
+    bottom=1pt,
+  }
+}
+
+\tcolorboxenvironment{theorem}{thmboxstyle}{}{}
+\tcolorboxenvironment{lemma}{thmboxstyle}{}{}
+\tcolorboxenvironment{corollary}{thmboxstyle}{}{}
+\tcolorboxenvironment{proposition}{thmboxstyle}{}{}
+\tcolorboxenvironment{definition}{thmboxstyle}{}{}
+\tcolorboxenvironment{example}{thmboxstyle}{}{}
+\tcolorboxenvironment{remark}{thmboxstyle}{}{}

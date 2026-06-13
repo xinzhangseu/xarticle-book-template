@@ -1,0 +1,77 @@
+%% ============================================================
+%% Preamble: font, layout, and style settings
+%% Matching the style of article.tex (XeLaTeX, Palatino-like)
+%% ============================================================
+
+%% ---- natbib citation style (numbers, sorted & compressed) ----
+\setcitestyle{numbers,sort&compress,square}
+
+%% ---- Line spacing ----
+\renewcommand{\baselinestretch}{1.2}
+%%
+\usepackage{orcidlink}
+%% ---- Caption: disable auto-centering of single-line captions ----
+\usepackage{caption}
+\captionsetup{singlelinecheck=off}
+
+%% ---- Custom differential operator ----
+\newcommand*{\dd}{\mathop{}\!\mathrm{d}}
+
+%% ---- Allow display math to break across pages ----
+\allowdisplaybreaks
+
+%% ---- Hyperlink colors (deferred until hyperref is loaded) ----
+\AtBeginDocument{%
+  \hypersetup{%
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    colorlinks=true,
+    linkcolor=red,
+    anchorcolor=blue,
+    citecolor=blue,
+    breaklinks=true
+  }%
+}
+
+%% ---- Language ----
+\usepackage[english]{babel}
+
+%% ---- Font setup (XeLaTeX, Palatino-like: TeX Gyre Pagella) ----
+%% Text font: newpxtext gives Palatino-like (TeX Gyre Pagella) text
+%% Math font: Quarto's default unicode-math (Latin Modern Math)
+\usepackage[theoremfont]{newpxtext}
+
+\defaultfontfeatures{Mapping=tex-text}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+
+%% ---- CJK font setup (Chinese support) ----
+\usepackage[fallback,CJKchecksingle]{xeCJK}
+\setCJKmainfont{KaiTi}
+\setCJKsansfont{Noto Sans SC}
+\setCJKmonofont{Noto Sans SC}
+
+\punctstyle{banjiao}
+
+%% ============================================================
+%% Page headers and footers (fancyhdr)
+%% ============================================================
+\usepackage{fancyhdr}
+\usepackage{emptypage}         % suppress headers/footers on blank pages
+\pagestyle{fancy}
+\fancyhf{}                      % clear all headers and footers
+\fancyhead[C]{\rightmark}       % centered header: current section title
+\fancyfoot[C]{\thepage}         % centered footer: page number
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+% Ensure plain pages (chapter openings) also have the same layout
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[C]{\rightmark}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+
+%% ---- Section mark: show "1.1 Introduction" in header ----
+\renewcommand{\sectionmark}[1]{\markright{\thesection\space #1}}

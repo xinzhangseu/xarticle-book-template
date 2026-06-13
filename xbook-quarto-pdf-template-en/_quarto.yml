@@ -1,0 +1,6 @@
+project:
+  output-dir: .
+
+formats:
+  xbook-en-pdf:
+    pdf-engine: xelatex

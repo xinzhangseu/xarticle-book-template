@@ -1,0 +1,14 @@
+% Bibliography will be placed here by Pandoc
+
+% Step 1: neutralise \chaptermark so the chapter* command does not set a new mark
+\let\stdchaptermark\chaptermark
+\renewcommand{\chaptermark}[1]{}
+
+% Step 2: neutralise \@mkboth — MUST be inside \makeatletter!
+\makeatletter
+\let\stdmkboth\@mkboth
+\def\@mkboth#1#2{}
+\makeatother
+
+% Step 3: clear any existing mark
+\markright{}

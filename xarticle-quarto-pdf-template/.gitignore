@@ -1,0 +1,14 @@
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Quarto
+/.quarto/
+_freeze/
+**/*.quarto_ipynb
+
+# Editor
+/.luarc.json

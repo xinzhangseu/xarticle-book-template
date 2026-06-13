@@ -1,0 +1,11 @@
+$if(title)$
+\title{\Large $title$}
+$endif$
+
+$if(by-author)$
+\author{$for(by-author)$$author.tex()$$sep$\hspace{2em}$endfor$}
+$endif$
+
+$if(date)$
+\date{\small $date$}
+$endif$

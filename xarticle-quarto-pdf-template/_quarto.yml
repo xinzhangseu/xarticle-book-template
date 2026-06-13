@@ -1,0 +1,6 @@
+project:
+  output-dir: .
+
+formats:
+  xarticle-pdf:
+    pdf-engine: xelatex

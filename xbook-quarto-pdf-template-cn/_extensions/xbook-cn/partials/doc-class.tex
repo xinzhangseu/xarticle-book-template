@@ -1,0 +1,14 @@
+%% Load thmtools before ctexbook so \renewtheorem works
+\RequirePackage{thmtools}
+\documentclass[
+$if(fontsize)$
+  $fontsize$,
+$endif$
+$if(papersize)$
+  $papersize$paper,
+$endif$
+$for(classoption)$
+  $classoption$$sep$,
+$endfor$
+fontset=none,
+]{ctexbook}

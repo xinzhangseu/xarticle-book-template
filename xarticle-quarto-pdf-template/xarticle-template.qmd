@@ -1,0 +1,114 @@
+---
+title: A Sample Article Using Quarto with Standard LaTeX Article Class
+format:
+  xarticle-pdf:
+    keep-tex: true
+author:
+  - id: xz
+    name: Xin Zhang
+    affiliations:
+      - name: Southeast University
+        department: School of Mathematics
+        city: Nanjing
+        country: China
+        postal-code: 211189
+    orcid: 0000-0001-6670-5351
+    email: xzhangseu@seu.edu.cn
+    url: https://math.seu.edu.cn/zx_en/list.htm
+    attributes:
+      corresponding: true
+    bio: |
+      Author biography text goes here.
+  - name: John Doe
+    affiliations: 
+      - name: Anonymous University
+    bio: |
+      Author biography text goes here.
+abstract: |
+  This document demonstrates how to use Quarto with the standard LaTeX article
+  document class. It produces PDF output suitable for preprints,
+  working papers, and general academic writing.
+keywords: [Quarto, LaTeX, article, Pandoc, template]
+bibliography: bibliography.bib
+date: 2023-06-23
+---
+
+# Introduction {#sec-intro}
+
+中国人民This file is a sample article demonstrating Quarto's capabilities with the standard
+LaTeX `article` document class. It supports PDF (via LaTeX) output.
+It is assumed that the reader has a basic working knowledge of stochastic calculus @karatzas1991brownian
+and stochastic control theory @yong1999sch.
+
+::: {#thm-residue .theorem}
+## Residue Theorem
+Let $f$ be analytic in a simply connected domain $D$. Then for any closed contour $\gamma \subset D$,
+$$
+\oint_\gamma f(z)\,dz = 2\pi i \sum_{k} \mathrm{Res}(f, z_k)
+$$
+:::
+
+This template supports standard Quarto cross-references. You can refer to Theorem [@thm-residue] in the text.
+
+# Markdown Basics {#sec-markdown}
+
+The template is built on Quarto and Pandoc, leveraging standard LaTeX tools for PDF output.
+
+## Equations
+
+Inline math: $E = mc^2$. Display math:
+
+$$
+\frac{\partial u}{\partial t} = \alpha \nabla^2 u
+$$
+
+## Theorems and Proofs
+
+::: {#lem-key .lemma}
+## Key Lemma
+If $f$ is continuous on $[a,b]$, then $f$ is integrable on $[a,b]$.
+:::
+
+::: {#cor-easy .corollary}
+## Easy Corollary
+Every continuous function on a closed interval is bounded.
+:::
+
+::: {#def-model .definition}
+## Model Definition
+A stochastic process $\{X_t\}_{t \ge 0}$ is a collection of random variables indexed by time.
+:::
+
+## Lists
+
+1. First item
+2. Second item
+3. Third item
+
+- Bullet one
+- Bullet two
+
+## Tables
+
+| Variable | Description | Unit |
+|-----------|-------------|------|
+| $x$       | Position    | m    |
+| $v$       | Velocity    | m/s  |
+| $a$       | Acceleration| m/s² |
+
+: A sample table {#tbl-sample}
+
+# Bibliography
+
+This template uses `natbib` with the `plainnat-doi` bibliography style for author-year citations @karatzas1991brownian.
+
+# Acknowledgment {-}
+
+This should be a simple paragraph before the References to
+thank those individuals and institutions who have supported
+your work on this article.
+
+[]{.appendix options="An Appendix"}
+
+Use the `[]{.appendix options="An Appendix"}` markup if you have a single appendix.
+Do not use `\section{}` after `\appendix` in LaTeX.

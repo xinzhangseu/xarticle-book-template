@@ -1,0 +1,72 @@
+%% ============================================================
+%% Preamble: font, layout, and style settings
+%% Matching the style of article.tex (XeLaTeX, Palatino-like)
+%% ============================================================
+
+%% ---- Load thmtools early (before amsthm) to enable \renewtheorem ----
+\RequirePackage{thmtools}
+\usepackage{xpatch}
+
+%% ---- natbib citation style (numbers, sorted & compressed) ----
+\setcitestyle{numbers,sort&compress,square}
+
+%% ---- Line spacing ----
+\renewcommand{\baselinestretch}{1.2}
+%%
+\usepackage{thmtools}
+\usepackage{orcidlink}
+%% ---- Caption: disable auto-centering of single-line captions ----
+\usepackage{caption}
+\captionsetup{singlelinecheck=off}
+
+%% ---- Custom differential operator ----
+\newcommand*{\dd}{\mathop{}\!\mathrm{d}}
+
+%% ---- Allow display math to break across pages ----
+\allowdisplaybreaks
+
+%% ---- Hyperlink colors (deferred until hyperref is loaded) ----
+\AtBeginDocument{%
+  \renewcommand{\contentsname}{目录}%
+  \hypersetup{%
+    bookmarksnumbered=true,
+    bookmarksopen=true,
+    colorlinks=true,
+    linkcolor=red,
+    anchorcolor=blue,
+    citecolor=blue,
+    breaklinks=true
+  }%
+}
+
+%% ---- Page style: header (section title centered) + footer (page number centered) ----
+\usepackage{fancyhdr}
+\usepackage{emptypage}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\rightmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[C]{\rightmark}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\space #1}}
+
+%% ---- Font setup (XeLaTeX, Palatino-like: TeX Gyre Pagella) ----
+%% Text font: newpxtext gives Palatino-like (TeX Gyre Pagella) text
+%% Math font: Quarto's default unicode-math (Latin Modern Math)
+\defaultfontfeatures{Mapping=tex-text}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+\usepackage[theoremfont]{newpxtext}
+
+%% ---- CJK font setup (ctexbook with fontset=none) ----
+\setCJKmainfont{KaiTi}
+\setCJKsansfont{Noto Sans SC}
+\setCJKmonofont{Noto Sans SC}
+\punctstyle{banjiao}

@@ -1,0 +1,11 @@
+$for(by-author)$
+$if(it.metadata.bio)$
+\vspace*{18pt}
+\noindent\textbf{$it.name.literal$}\par
+$if(it.metadata.photo)$
+\includegraphics[width=2cm]{$it.metadata.photo$}
+$endif$
+
+$it.metadata.bio$\par
+$endif$
+$endfor$
