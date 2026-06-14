@@ -6,9 +6,9 @@
 %
 \documentclass[
   11pt,
-]{article}
+  twoside]{book}
 \usepackage{xcolor}
-\usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage[inner=1in,outer=1in,top=1in,bottom=1in]{geometry}
 \usepackage{amsmath,amssymb}
 \setcounter{secnumdepth}{5}
 \usepackage{iftex}
@@ -111,7 +111,7 @@
 
 %% ============================================================
 %% Preamble: font, layout, and style settings
-%% xarticle template (XeLaTeX, Palatino-like)
+%% Matching the style of article.tex (XeLaTeX, Palatino-like)
 %% ============================================================
 
 %% ---- natbib citation style (numbers, sorted & compressed) ----
@@ -163,6 +163,29 @@
 \setCJKmonofont{Noto Sans SC}
 
 \punctstyle{banjiao}
+
+%% ============================================================
+%% Page headers and footers (fancyhdr)
+%% ============================================================
+\usepackage{fancyhdr}
+\usepackage{emptypage}         % suppress headers/footers on blank pages
+\pagestyle{fancy}
+\fancyhf{}                      % clear all headers and footers
+\fancyhead[C]{\rightmark}       % centered header: current section title
+\fancyfoot[C]{\thepage}         % centered footer: page number
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+% Ensure plain pages (chapter openings) also have the same layout
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[C]{\rightmark}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+
+%% ---- Section mark: show "1.1 Introduction" in header ----
+\renewcommand{\sectionmark}[1]{\markright{\thesection\space #1}}
 % Theorem boxes — rounded corners, white/transparent background
 \usepackage[most,theorems,skins,breakable]{tcolorbox}
 
@@ -230,13 +253,13 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{lemma}{Lemma}[section]
-\theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \theoremstyle{plain}
 \newtheorem{corollary}{Corollary}[section]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}[section]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Proof}}
 \newtheorem*{remark}{Remark}
@@ -254,9 +277,9 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={A Sample Article Using Quarto with Standard LaTeX Article Class},
+  pdftitle={A Sample Book Using Quarto with Standard LaTeX Book Class},
   pdfauthor={Your Name; John Doe},
-  pdfkeywords={Quarto, LaTeX, article, Pandoc, template},
+  pdfkeywords={Quarto, LaTeX, book, Pandoc, template},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -265,8 +288,7 @@
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{\Large A Sample Article Using Quarto with Standard LaTeX Article
-Class}
+\title{\Large A Sample Book Using Quarto with Standard LaTeX Book Class}
 
 \author{\href{https://your-university.edu/your-profile}{Your
 Name}\footnote{Corresponding author: Your Department, Your
@@ -278,23 +300,25 @@ Doe\footnote{Anonymous University}}
 
 \begin{document}
 \maketitle
+\clearpage
+\mbox{}\thispagestyle{empty}
+\clearpage
+\pagenumbering{Roman}
+\markright{}
+\renewcommand*\contentsname{Contents}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
 
-{\small\noindent\textsc{Abstract}: This document demonstrates how to use
-Quarto with the standard LaTeX article document class. It produces PDF
-output suitable for preprints, working papers, and general academic
-writing.}
-\smallskip
+\mainmatter
+\chapter{Introduction}\label{sec-intro}
 
-\noindent\textsc{Key Words}: Quarto, LaTeX, article, Pandoc, template
-
-
-\section{Introduction}\label{sec-intro}
-
-This file is a sample article demonstrating Quarto's capabilities with
-the standard LaTeX \texttt{article} document class. It supports PDF (via
-LaTeX) output. It is assumed that the reader has a basic working
-knowledge of stochastic calculus \citet{karatzas1991brownian} and
-stochastic control theory \citet{yong1999sch}.
+This file is a sample book demonstrating Quarto's capabilities with the
+standard LaTeX \texttt{book} document class. It supports PDF (via LaTeX)
+output. It is assumed that the reader has a basic working knowledge of
+stochastic calculus \citet{karatzas1991brownian} and stochastic control
+theory \citet{yong1999sch}.
 
 \begin{theorem}[Residue
 Theorem]\protect\hypertarget{thm-residue}{}\label{thm-residue}
@@ -306,17 +330,15 @@ closed contour \(\gamma \subset D\), \[
 
 \end{theorem}
 
-中文测试
-
 This template supports standard Quarto cross-references. You can refer
 to Theorem Theorem~\ref{thm-residue} in the text.
 
-\section{Markdown Basics}\label{sec-markdown}
+\chapter{Markdown Basics}\label{sec-markdown}
 
 The template is built on Quarto and Pandoc, leveraging standard LaTeX
 tools for PDF output.
 
-\subsection{Equations}\label{equations}
+\section{Equations}\label{equations}
 
 Inline math: \(E = mc^2\). Display math:
 
@@ -324,7 +346,7 @@ Inline math: \(E = mc^2\). Display math:
 \frac{\partial u}{\partial t} = \alpha \nabla^2 u
 \]
 
-\subsection{Theorems and Proofs}\label{theorems-and-proofs}
+\section{Theorems and Proofs}\label{theorems-and-proofs}
 
 \begin{lemma}[Key Lemma]\protect\hypertarget{lem-key}{}\label{lem-key}
 
@@ -348,7 +370,7 @@ variables indexed by time.
 
 \end{definition}
 
-\subsection{Lists}\label{lists}
+\section{Lists}\label{lists}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -369,7 +391,7 @@ variables indexed by time.
   Bullet two
 \end{itemize}
 
-\subsection{Tables}\label{tables}
+\section{Tables}\label{tables}
 
 \begin{longtable}[]{@{}lll@{}}
 \caption{A sample table}\label{tbl-sample}\tabularnewline
@@ -388,18 +410,17 @@ Variable & Description & Unit \\
 \(a\) & Acceleration & m/s² \\
 \end{longtable}
 
-\section{Bibliography}\label{bibliography}
+\chapter{Bibliography}\label{bibliography}
 
 This template uses \texttt{natbib} with the \texttt{plainnat-doi}
 bibliography style for author-year citations
 \citet{karatzas1991brownian}.
 
-\section*{Acknowledgment}\label{acknowledgment}
-\addcontentsline{toc}{section}{Acknowledgment}
+\chapter*{Acknowledgment}\label{acknowledgment}
+\addcontentsline{toc}{chapter}{Acknowledgment}
 
 This should be a simple paragraph before the References to thank those
-individuals and institutions who have supported your work on this
-article.
+individuals and institutions who have supported your work on this book.
 
 {}
 
@@ -409,7 +430,21 @@ you have a single appendix. Do not use
 \texttt{\textbackslash{}appendix} in LaTeX.
 
 % Bibliography will be placed here by Pandoc
-\renewcommand\refname{References}
+
+% Step 1: neutralise \chaptermark so the chapter* command does not set a new mark
+\let\stdchaptermark\chaptermark
+\renewcommand{\chaptermark}[1]{}
+
+% Step 2: neutralise \@mkboth — MUST be inside \makeatletter!
+\makeatletter
+\let\stdmkboth\@mkboth
+\def\@mkboth#1#2{}
+\makeatother
+
+% Step 3: clear any existing mark
+\markright{}
+\backmatter
+\renewcommand\bibname{References}
 \bibliography{bibliography.bib}
 
 
@@ -420,6 +455,6 @@ Author biography text goes here.\par
 \vspace*{18pt}
 \noindent\textbf{John Doe}\par
 
-Author biography text goes here.\par
+John Doe is a researcher at Anonymous University.\par
 
 \end{document}

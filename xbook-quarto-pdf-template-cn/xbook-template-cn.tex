@@ -4,9 +4,12 @@
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
+%% Load thmtools before ctexbook so \renewtheorem works
+\RequirePackage{thmtools}
 \documentclass[
   11pt,
-]{article}
+  onesidefontset=none,
+]{ctexbook}
 \usepackage{xcolor}
 \usepackage[left=1in,right=1in,top=1in,bottom=1in]{geometry}
 \usepackage{amsmath,amssymb}
@@ -95,6 +98,14 @@
 
 
 
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off,provide=*]{babel}
+\else
+\usepackage[bidi=default,shorthands=off,provide=*]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
 
 
 \setlength{\emergencystretch}{3em} % prevent overfull lines
@@ -111,8 +122,12 @@
 
 %% ============================================================
 %% Preamble: font, layout, and style settings
-%% xarticle template (XeLaTeX, Palatino-like)
+%% Matching the style of article.tex (XeLaTeX, Palatino-like)
 %% ============================================================
+
+%% ---- Load thmtools early (before amsthm) to enable \renewtheorem ----
+\RequirePackage{thmtools}
+\usepackage{xpatch}
 
 %% ---- natbib citation style (numbers, sorted & compressed) ----
 \setcitestyle{numbers,sort&compress,square}
@@ -120,6 +135,7 @@
 %% ---- Line spacing ----
 \renewcommand{\baselinestretch}{1.2}
 %%
+\usepackage{thmtools}
 \usepackage{orcidlink}
 %% ---- Caption: disable auto-centering of single-line captions ----
 \usepackage{caption}
@@ -133,6 +149,7 @@
 
 %% ---- Hyperlink colors (deferred until hyperref is loaded) ----
 \AtBeginDocument{%
+  \renewcommand{\contentsname}{目录}%
   \hypersetup{%
     bookmarksnumbered=true,
     bookmarksopen=true,
@@ -144,24 +161,36 @@
   }%
 }
 
-%% ---- Language ----
-\usepackage[english]{babel}
+%% ---- Page style: header (section title centered) + footer (page number centered) ----
+\usepackage{fancyhdr}
+\usepackage{emptypage}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\rightmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[C]{\rightmark}%
+  \fancyfoot[C]{\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\space #1}}
 
 %% ---- Font setup (XeLaTeX, Palatino-like: TeX Gyre Pagella) ----
 %% Text font: newpxtext gives Palatino-like (TeX Gyre Pagella) text
 %% Math font: Quarto's default unicode-math (Latin Modern Math)
-\usepackage[theoremfont]{newpxtext}
-
 \defaultfontfeatures{Mapping=tex-text}
 \XeTeXlinebreaklocale "zh"
 \XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+\usepackage[theoremfont]{newpxtext}
 
-%% ---- CJK font setup (Chinese support) ----
-\usepackage[fallback,CJKchecksingle]{xeCJK}
+%% ---- CJK font setup (ctexbook with fontset=none) ----
 \setCJKmainfont{KaiTi}
 \setCJKsansfont{Noto Sans SC}
 \setCJKmonofont{Noto Sans SC}
-
 \punctstyle{banjiao}
 % Theorem boxes — rounded corners, white/transparent background
 \usepackage[most,theorems,skins,breakable]{tcolorbox}
@@ -198,51 +227,51 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
 \ifdefined\contentsname
-  \renewcommand*\contentsname{Table of contents}
+  \renewcommand*\contentsname{目录}
 \else
-  \newcommand\contentsname{Table of contents}
+  \newcommand\contentsname{目录}
 \fi
 \ifdefined\listfigurename
-  \renewcommand*\listfigurename{List of Figures}
+  \renewcommand*\listfigurename{图索引}
 \else
-  \newcommand\listfigurename{List of Figures}
+  \newcommand\listfigurename{图索引}
 \fi
 \ifdefined\listtablename
-  \renewcommand*\listtablename{List of Tables}
+  \renewcommand*\listtablename{表索引}
 \else
-  \newcommand\listtablename{List of Tables}
+  \newcommand\listtablename{表索引}
 \fi
 \ifdefined\figurename
-  \renewcommand*\figurename{Figure}
+  \renewcommand*\figurename{图}
 \else
-  \newcommand\figurename{Figure}
+  \newcommand\figurename{图}
 \fi
 \ifdefined\tablename
-  \renewcommand*\tablename{Table}
+  \renewcommand*\tablename{表}
 \else
-  \newcommand\tablename{Table}
+  \newcommand\tablename{表}
 \fi
 }
 \@ifpackageloaded{float}{}{\usepackage{float}}
 \floatstyle{ruled}
 \@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
-\floatname{codelisting}{Listing}
-\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\floatname{codelisting}{列表}
+\newcommand*\listoflistings{\listof{codelisting}{列表索引}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{lemma}{Lemma}[section]
+\newtheorem{lemma}{引理}[section]
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{推论}[section]
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
+\newtheorem{definition}{定义}[section]
 \theoremstyle{plain}
-\newtheorem{corollary}{Corollary}[section]
+\newtheorem{theorem}{定理}[section]
 \theoremstyle{remark}
-\AtBeginDocument{\renewcommand*{\proofname}{Proof}}
-\newtheorem*{remark}{Remark}
-\newtheorem*{solution}{Solution}
-\newtheorem{refremark}{Remark}[section]
-\newtheorem{refsolution}{Solution}[section]
+\AtBeginDocument{\renewcommand*{\proofname}{证明}}
+\newtheorem*{remark}{注记}
+\newtheorem*{solution}{解}
+\newtheorem{refremark}{注记}[section]
+\newtheorem{refsolution}{解}[section]
 \makeatother
 \makeatletter
 \makeatother
@@ -254,9 +283,10 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={A Sample Article Using Quarto with Standard LaTeX Article Class},
-  pdfauthor={Your Name; John Doe},
-  pdfkeywords={Quarto, LaTeX, article, Pandoc, template},
+  pdftitle={基于 Quarto 与标准 LaTeX Book 文档类的中文书籍模板},
+  pdfauthor={你的名字; John Doe},
+  pdflang={zh-CN},
+  pdfkeywords={Quarto, LaTeX, book, Pandoc, template},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -265,36 +295,53 @@
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{\Large A Sample Article Using Quarto with Standard LaTeX Article
-Class}
+\title{\Large 基于 Quarto 与标准 LaTeX Book 文档类的中文书籍模板}
 
-\author{\href{https://your-university.edu/your-profile}{Your
-Name}\footnote{Corresponding author: Your Department, Your
-University, Your City, 0, Your
-Country. E-mail: \texttt{your.email@university.edu}}\,~\orcidlink{0000-0000-0000-0001}\hspace{2em}John
+\author{\href{https://your-university.edu/your-profile}{你的名字}\footnote{通讯作者: 你的大学 你的院系, 你的城市, 0, 中国. E-mail: \texttt{your.email@university.edu}}\,~\orcidlink{0000-0000-0000-0001}\hspace{2em}John
 Doe\footnote{Anonymous University}}
 
 \date{\small 2023-06-23}
 
 \begin{document}
 \maketitle
+\clearpage
+\mbox{}\thispagestyle{empty}
+\clearpage
+\pagenumbering{Roman}
+\markright{}
 
-{\small\noindent\textsc{Abstract}: This document demonstrates how to use
-Quarto with the standard LaTeX article document class. It produces PDF
-output suitable for preprints, working papers, and general academic
-writing.}
-\smallskip
+% --- Chinese theorem/proof names (redefine via \let + \newtheorem) ---
+\makeatletter
+\let\theorem\relax\let\c@theorem\relax
+\let\lemma\relax\let\c@lemma\relax
+\let\corollary\relax\let\c@corollary\relax
+\let\definition\relax\let\c@definition\relax
+\let\proposition\relax\let\c@proposition\relax
+\let\example\relax\let\c@example\relax
+\let\remark\relax\let\c@remark\relax
+\makeatother
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\newtheorem{corollary}{推论}[section]
+\newtheorem{definition}{定义}[section]
+\newtheorem{proposition}{命题}[section]
+\newtheorem{example}{例}[section]
+\newtheorem{remark}{注}[section]
+\renewcommand{\proofname}{证明}
+\renewcommand*\contentsname{目录}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
 
-\noindent\textsc{Key Words}: Quarto, LaTeX, article, Pandoc, template
+\mainmatter
+\chapter{Introduction}\label{sec-intro}
 
-
-\section{Introduction}\label{sec-intro}
-
-This file is a sample article demonstrating Quarto's capabilities with
-the standard LaTeX \texttt{article} document class. It supports PDF (via
-LaTeX) output. It is assumed that the reader has a basic working
-knowledge of stochastic calculus \citet{karatzas1991brownian} and
-stochastic control theory \citet{yong1999sch}.
+This file is a sample book demonstrating Quarto's capabilities with the
+standard LaTeX \texttt{book} document class. It supports PDF (via LaTeX)
+output. It is assumed that the reader has a basic working knowledge of
+stochastic calculus \citet{karatzas1991brownian} and stochastic control
+theory \citet{yong1999sch}.
 
 \begin{theorem}[Residue
 Theorem]\protect\hypertarget{thm-residue}{}\label{thm-residue}
@@ -306,17 +353,15 @@ closed contour \(\gamma \subset D\), \[
 
 \end{theorem}
 
-中文测试
-
 This template supports standard Quarto cross-references. You can refer
-to Theorem Theorem~\ref{thm-residue} in the text.
+to 定理 定理~\ref{thm-residue} in the text.
 
-\section{Markdown Basics}\label{sec-markdown}
+\chapter{Markdown Basics}\label{sec-markdown}
 
 The template is built on Quarto and Pandoc, leveraging standard LaTeX
 tools for PDF output.
 
-\subsection{Equations}\label{equations}
+\section{Equations}\label{equations}
 
 Inline math: \(E = mc^2\). Display math:
 
@@ -324,7 +369,7 @@ Inline math: \(E = mc^2\). Display math:
 \frac{\partial u}{\partial t} = \alpha \nabla^2 u
 \]
 
-\subsection{Theorems and Proofs}\label{theorems-and-proofs}
+\section{Theorems and Proofs}\label{theorems-and-proofs}
 
 \begin{lemma}[Key Lemma]\protect\hypertarget{lem-key}{}\label{lem-key}
 
@@ -348,7 +393,7 @@ variables indexed by time.
 
 \end{definition}
 
-\subsection{Lists}\label{lists}
+\section{Lists}\label{lists}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -369,7 +414,7 @@ variables indexed by time.
   Bullet two
 \end{itemize}
 
-\subsection{Tables}\label{tables}
+\section{Tables}\label{tables}
 
 \begin{longtable}[]{@{}lll@{}}
 \caption{A sample table}\label{tbl-sample}\tabularnewline
@@ -388,18 +433,17 @@ Variable & Description & Unit \\
 \(a\) & Acceleration & m/s² \\
 \end{longtable}
 
-\section{Bibliography}\label{bibliography}
+\chapter{参考文献设置}\label{ux53c2ux8003ux6587ux732eux8bbeux7f6e}
 
 This template uses \texttt{natbib} with the \texttt{plainnat-doi}
 bibliography style for author-year citations
 \citet{karatzas1991brownian}.
 
-\section*{Acknowledgment}\label{acknowledgment}
-\addcontentsline{toc}{section}{Acknowledgment}
+\chapter*{致谢}\label{ux81f4ux8c22}
+\addcontentsline{toc}{chapter}{致谢}
 
 This should be a simple paragraph before the References to thank those
-individuals and institutions who have supported your work on this
-article.
+individuals and institutions who have supported your work on this book.
 
 {}
 
@@ -409,17 +453,27 @@ you have a single appendix. Do not use
 \texttt{\textbackslash{}appendix} in LaTeX.
 
 % Bibliography will be placed here by Pandoc
-\renewcommand\refname{References}
+% Patch \bibliography to use \bibname (Chinese "参考文献")
+\xpatchcmd{\bibliography}{\chapter{Bibliography}}{\chapter{\bibname}}{}{}
+\let\stdchaptermark\chaptermark
+\renewcommand{\chaptermark}[1]{}
+\makeatletter
+\let\stdmkboth\@mkboth
+\def\@mkboth#1#2{}
+\makeatother
+\markright{}
+\backmatter
+\renewcommand\bibname{参考文献}
 \bibliography{bibliography.bib}
 
 
 \vspace*{18pt}
-\noindent\textbf{Your Name}\par
+\noindent\textbf{你的名字}\par
 
 Author biography text goes here.\par
 \vspace*{18pt}
 \noindent\textbf{John Doe}\par
 
-Author biography text goes here.\par
+John Doe is a researcher at Anonymous University.\par
 
 \end{document}
