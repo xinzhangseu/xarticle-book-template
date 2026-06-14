@@ -18,3 +18,4 @@ _freeze/
 # Editor
 /.luarc.json
 *.html
+.Rproj.user

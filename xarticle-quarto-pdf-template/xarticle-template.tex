@@ -230,9 +230,9 @@
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{lemma}{Lemma}[section]
-\theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}[section]
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \theoremstyle{plain}
@@ -255,7 +255,7 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={A Sample Article Using Quarto with Standard LaTeX Article Class},
-  pdfauthor={Xin Zhang; John Doe},
+  pdfauthor={Your Name; John Doe},
   pdfkeywords={Quarto, LaTeX, article, Pandoc, template},
   colorlinks=true,
   linkcolor={blue},
@@ -268,9 +268,10 @@
 \title{\Large A Sample Article Using Quarto with Standard LaTeX Article
 Class}
 
-\author{\href{https://math.seu.edu.cn/zx\_en/list.htm}{Xin
-Zhang}\footnote{Corresponding author: School of Mathematics, Southeast
-University, Nanjing, 211189, China. E-mail: \texttt{xzhangseu@seu.edu.cn}}\,~\orcidlink{0000-0001-6670-5351}\hspace{2em}John
+\author{\href{https://your-university.edu/your-profile}{Your
+Name}\footnote{Corresponding author: Your Department, Your
+University, Your City, 0, Your
+Country. E-mail: \texttt{your.email@university.edu}}\,~\orcidlink{0000-0000-0000-0001}\hspace{2em}John
 Doe\footnote{Anonymous University}}
 
 \date{\small 2023-06-23}
@@ -289,12 +290,11 @@ writing.}
 
 \section{Introduction}\label{sec-intro}
 
-中国人民This file is a sample article demonstrating Quarto's
-capabilities with the standard LaTeX \texttt{article} document class. It
-supports PDF (via LaTeX) output. It is assumed that the reader has a
-basic working knowledge of stochastic calculus
-\citet{karatzas1991brownian} and stochastic control theory
-\citet{yong1999sch}.
+This file is a sample article demonstrating Quarto's capabilities with
+the standard LaTeX \texttt{article} document class. It supports PDF (via
+LaTeX) output. It is assumed that the reader has a basic working
+knowledge of stochastic calculus \citet{karatzas1991brownian} and
+stochastic control theory \citet{yong1999sch}.
 
 \begin{theorem}[Residue
 Theorem]\protect\hypertarget{thm-residue}{}\label{thm-residue}
@@ -305,6 +305,8 @@ closed contour \(\gamma \subset D\), \[
 \]
 
 \end{theorem}
+
+中文测试
 
 This template supports standard Quarto cross-references. You can refer
 to Theorem Theorem~\ref{thm-residue} in the text.
@@ -412,7 +414,7 @@ you have a single appendix. Do not use
 
 
 \vspace*{18pt}
-\noindent\textbf{Xin Zhang}\par
+\noindent\textbf{Your Name}\par
 
 Author biography text goes here.\par
 \vspace*{18pt}

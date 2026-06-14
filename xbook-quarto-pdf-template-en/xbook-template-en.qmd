@@ -5,22 +5,20 @@ format:
     keep-tex: true
 author:
   - id: xz
-    name: Xin Zhang
+    name: Your Name
     affiliations:
-      - name: Southeast University
-        department: School of Mathematics
-        city: Nanjing
-        country: China
-        postal-code: 211189
-    orcid: 0000-0001-6670-5351
-    email: xzhangseu@seu.edu.cn
-    url: https://math.seu.edu.cn/zx_en/list.htm
+      - name: Your University
+        department: Your Department
+        city: Your City
+        country: Your Country
+        postal-code: 000000
+    orcid: 0000-0000-0000-0001
+    email: your.email@university.edu
+    url: https://your-university.edu/your-profile
     attributes:
       corresponding: true
     bio: |
-      Xin Zhang is a professor at the School of Mathematics, Southeast University.
-      His research interests include stochastic control theory and its applications
-      in finance and insurance.
+      Author biography text goes here.
   - name: John Doe
     affiliations:
       - name: Anonymous University
