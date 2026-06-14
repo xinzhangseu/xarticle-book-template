@@ -20,7 +20,7 @@ author:
     bio: |
       Author biography text goes here.
   - name: John Doe
-    affiliations: 
+    affiliations:
       - name: Anonymous University
     bio: |
       Author biography text goes here.
@@ -35,7 +35,7 @@ date: 2023-06-23
 
 # Introduction {#sec-intro}
 
-中国人民This file is a sample article demonstrating Quarto's capabilities with the standard
+This file is a sample article demonstrating Quarto's capabilities with the standard
 LaTeX `article` document class. It supports PDF (via LaTeX) output.
 It is assumed that the reader has a basic working knowledge of stochastic calculus @karatzas1991brownian
 and stochastic control theory @yong1999sch.
@@ -47,6 +47,8 @@ $$
 \oint_\gamma f(z)\,dz = 2\pi i \sum_{k} \mathrm{Res}(f, z_k)
 $$
 :::
+
+中文测试
 
 This template supports standard Quarto cross-references. You can refer to Theorem [@thm-residue] in the text.
 
