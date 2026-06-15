@@ -1,6 +1,13 @@
 project:
   output-dir: .
 
-formats:
+format:
   xarticle-pdf:
     pdf-engine: xelatex
+    keep-tex: true
+    mainfont: "TeX Gyre Pagella"
+    CJKmainfont: "Kaiti SC"
+    CJKsansfont: "Noto Sans SC"
+    CJKmonofont: "Noto Sans SC"
+    #mathfont: "mlmodern"
+

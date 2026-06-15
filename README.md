@@ -37,7 +37,14 @@ project:
 format:
   xarticle-pdf:
     pdf-engine: xelatex
+    keep-tex: true
+    mainfont: "TeX Gyre Pagella"
+    CJKmainfont: "Kaiti SC"
+    CJKsansfont: "Noto Sans SC"
+    CJKmonofont: "Noto Sans SC"
 ```
+
+字体在 `_quarto.yml` 中配置，无需修改 LaTeX 文件即可更换字体。
 
 #### 3. 编写文档
 
@@ -81,7 +88,7 @@ quarto render document.qmd
 
 - Quarto >= 1.3.0
 - XeLaTeX (通过 TeX Live 或 MacTeX 安装)
-- 中文字体：楷体 (KaiTi)、Noto Sans SC
+- 中文字体：Kaiti SC、Noto Sans SC
 
 ### 模板特性
 
@@ -89,9 +96,9 @@ quarto render document.qmd
 |------|------|
 | **LaTeX 基础类** | 标准 `article` 文档类 |
 | **PDF 引擎** | XeLaTeX |
-| **正文字体** | Palatino-like (TeX Gyre Pagella, 通过 `newpxtext`) |
+| **正文字体** | Palatino-like (TeX Gyre Pagella，通过 `_quarto.yml` 的 `mainfont` 配置) |
 | **数学字体** | Latin Modern Math (unicode-math) |
-| **中文支持** | 通过 `xeCJK`，正文楷体 (KaiTi)，无衬线/等宽为 Noto Sans SC |
+| **中文支持** | 通过 `xeCJK`，字体在 `_quarto.yml` 中配置：CJK 正文 Kaiti SC，无衬线/等宽 Noto Sans SC |
 | **参考文献** | natbib，数字序号，方括号，排序压缩。样式 `plainnat-doi`，含 DOI 链接 |
 | **页面布局** | 11pt 字号，四边 1 英寸页边距 |
 | **行距** | 1.2 倍行距 |
@@ -222,7 +229,14 @@ project:
 format:
   xbook-en-pdf:
     pdf-engine: xelatex
+    keep-tex: true
+    mainfont: "TeX Gyre Pagella"
+    CJKmainfont: "Kaiti SC"
+    CJKsansfont: "Noto Sans SC"
+    CJKmonofont: "Noto Sans SC"
 ```
+
+字体在 `_quarto.yml` 中配置，无需修改 LaTeX 文件即可更换字体。
 
 #### 3. 编写文档
 
@@ -280,7 +294,7 @@ quarto render xbook-template-en.qmd
 
 - Quarto >= 1.3.0
 - XeLaTeX (通过 TeX Live 或 MacTeX 安装)
-- 中文字体：楷体 (KaiTi)、Noto Sans SC（用于 CJK fallback）
+- 中文字体：Kaiti SC、Noto Sans SC（用于 CJK fallback）
 
 ### 模板特性
 
@@ -288,9 +302,9 @@ quarto render xbook-template-en.qmd
 |------|------|
 | **LaTeX 基础类** | 标准 `book` 文档类 |
 | **PDF 引擎** | XeLaTeX |
-| **正文字体** | Palatino-like (TeX Gyre Pagella, 通过 `newpxtext`) |
+| **正文字体** | Palatino-like (TeX Gyre Pagella，通过 `_quarto.yml` 的 `mainfont` 配置) |
 | **数学字体** | Latin Modern Math (unicode-math) |
-| **中文支持** | 通过 `xeCJK`（fallback 模式），正文楷体 (KaiTi)，无衬线/等宽为 Noto Sans SC |
+| **中文支持** | 通过 `xeCJK`（fallback 模式），字体在 `_quarto.yml` 中配置：CJK 正文 Kaiti SC，无衬线/等宽 Noto Sans SC |
 | **参考文献** | natbib，数字序号，方括号，排序压缩。样式 `plainnat-doi`，含 DOI 链接 |
 | **页面布局** | 11pt 字号，twoside 双面排版，内外边距各 1 英寸 |
 | **行距** | 1.2 倍行距 |
@@ -452,7 +466,14 @@ project:
 format:
   xbook-cn-pdf:
     pdf-engine: xelatex
+    keep-tex: true
+    mainfont: "TeX Gyre Pagella"
+    CJKmainfont: "Kaiti SC"
+    CJKsansfont: "Noto Sans SC"
+    CJKmonofont: "Noto Sans SC"
 ```
+
+字体在 `_quarto.yml` 中配置，无需修改 LaTeX 文件即可更换字体。
 
 #### 3. 编写文档
 
@@ -509,7 +530,7 @@ quarto render xbook-template-cn.qmd
 
 - Quarto >= 1.3.0
 - XeLaTeX (通过 TeX Live 或 MacTeX 安装)
-- 中文字体：楷体 (KaiTi)、Noto Sans SC
+- 中文字体：Kaiti SC、Noto Sans SC
 - 需安装 `thmtools` 宏包（用于重定义定理环境的中文名称）
 
 ### 模板特性
@@ -518,9 +539,9 @@ quarto render xbook-template-cn.qmd
 |------|------|
 | **LaTeX 基础类** | `ctexbook`（`fontset=none`，手动配置字体） |
 | **PDF 引擎** | XeLaTeX |
-| **正文字体** | Palatino-like (TeX Gyre Pagella, 通过 `newpxtext`) |
+| **正文字体** | Palatino-like (TeX Gyre Pagella，通过 `_quarto.yml` 的 `mainfont` 配置) |
 | **数学字体** | Latin Modern Math (unicode-math) |
-| **中文支持** | `ctexbook` + 手动字体配置，正文楷体 (KaiTi)，无衬线/等宽为 Noto Sans SC |
+| **中文支持** | `ctexbook` + 字体在 `_quarto.yml` 中配置：CJK 正文 Kaiti SC，无衬线/等宽 Noto Sans SC |
 | **中文标点** | 半角标点风格 (`\punctstyle{banjiao}`) |
 | **参考文献** | natbib，数字序号，方括号，排序压缩。样式 `plainnat-doi`，含 DOI 链接 |
 | **参考文献标题** | 自动显示为"参考文献"（通过 `xpatch` 修补 `\bibliography` 命令） |
@@ -683,7 +704,20 @@ quarto render document.qmd --to xarticle-pdf   # 或 xbook-en-pdf / xbook-cn-pdf
 
 **Q: 编译报错找不到字体？**
 
-确保系统安装了楷体 (KaiTi) 和 Noto Sans SC 字体。macOS 可通过字体册安装，Linux 可使用包管理器安装 `fonts-noto-cjk`。
+确保系统安装了 Kaiti SC 和 Noto Sans SC 字体。macOS 自带 Kaiti SC；Linux 可安装 `fonts-noto-cjk`，并将 `_quarto.yml` 中的 `CJKmainfont` 改为 `KaiTi`。
+
+**Q: 如何更换字体？**
+
+字体在 `_quarto.yml` 中集中配置，修改对应的键值即可，无需编辑 LaTeX 文件：
+
+```yaml
+format:
+  xarticle-pdf:        # 或 xbook-en-pdf / xbook-cn-pdf
+    mainfont: "Times New Roman"           # 西文正文
+    CJKmainfont: "SimSun"                  # 中文正文
+    CJKsansfont: "SimHei"                  # 中文无衬线
+    CJKmonofont: "FangSong"                # 中文等宽
+```
 
 **Q: 如何切换为单面/双面排版？**
 

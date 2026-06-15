@@ -1,8 +1,6 @@
 ---
 title: A Sample Article Using Quarto with Standard LaTeX Article Class
-format:
-  xarticle-pdf:
-    keep-tex: true
+
 author:
   - id: xz
     name: Your Name
@@ -39,6 +37,29 @@ This file is a sample article demonstrating Quarto's capabilities with the stand
 LaTeX `article` document class. It supports PDF (via LaTeX) output.
 It is assumed that the reader has a basic working knowledge of stochastic calculus @karatzas1991brownian
 and stochastic control theory @yong1999sch.
+
+
+$$
+\begin{aligned}
+&\forall x \in \mathbb{R},\quad 
+\exists\, y \in \mathbb{N}:\quad 
+\alpha + \beta = \gamma \neq \delta \leq \epsilon \approx \zeta \\
+&\sum_{i=1}^{n} x_i^2 + \prod_{j=1}^{m} y_j^2 = \int_{a}^{b} f(x)\,dx \\
+&\lim_{n\to\infty} \frac{1}{n} = 0, \qquad
+\nabla \cdot \vec{E} = \frac{\rho}{\varepsilon_0} \\
+&A = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}, \qquad
+B = \begin{bmatrix} b_1 \\ b_2 \end{bmatrix} \\
+&S = \{ x \mid x > 0 \}, \qquad
+f: X \to Y, \qquad
+x \mapsto f(x) \\
+&\bigcup_{i=1}^n A_i \cap \bigcap_{j=1}^m B_j, \qquad
+A \subseteq B, \quad A \supset B \\
+&\mathcal{L} = \mathcal{F}(\mathbb{R}), \qquad
+\mathfrak{g} \cong \mathfrak{h} \\
+&\boxed{E = mc^2}
+\end{aligned}
+$$
+
 
 ::: {#thm-residue .theorem}
 ## Residue Theorem

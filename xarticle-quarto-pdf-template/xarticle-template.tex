@@ -3,6 +3,7 @@
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\PassOptionsToPackage{space}{xeCJK}
 %
 \documentclass[
   11pt,
@@ -24,6 +25,17 @@
 \usepackage{lmodern}
 \ifPDFTeX\else
   % xetex/luatex font selection
+  \setmainfont[]{TeX Gyre Pagella}
+  \ifXeTeX
+    \usepackage{xeCJK}
+    \setCJKmainfont[]{Kaiti SC}
+    \setCJKsansfont[]{Noto Sans SC}
+    \setCJKmonofont[]{Noto Sans SC}
+  \fi
+  \ifLuaTeX
+    \usepackage[]{luatexja-fontspec}
+    \setmainjfont[]{Kaiti SC}
+  \fi
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -158,9 +170,9 @@
 
 %% ---- CJK font setup (Chinese support) ----
 \usepackage[fallback,CJKchecksingle]{xeCJK}
-\setCJKmainfont{KaiTi}
-\setCJKsansfont{Noto Sans SC}
-\setCJKmonofont{Noto Sans SC}
+%%\setCJKmainfont{KaiTi}
+%%\setCJKsansfont{Noto Sans SC}
+%%\setCJKmonofont{Noto Sans SC}
 
 \punctstyle{banjiao}
 % Theorem boxes — rounded corners, white/transparent background
@@ -229,14 +241,14 @@
 \floatname{codelisting}{Listing}
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \usepackage{amsthm}
-\theoremstyle{plain}
-\newtheorem{lemma}{Lemma}[section]
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \theoremstyle{plain}
 \newtheorem{corollary}{Corollary}[section]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Proof}}
 \newtheorem*{remark}{Remark}
@@ -295,6 +307,27 @@ the standard LaTeX \texttt{article} document class. It supports PDF (via
 LaTeX) output. It is assumed that the reader has a basic working
 knowledge of stochastic calculus \citet{karatzas1991brownian} and
 stochastic control theory \citet{yong1999sch}.
+
+\[
+\begin{aligned}
+&\forall x \in \mathbb{R},\quad 
+\exists\, y \in \mathbb{N}:\quad 
+\alpha + \beta = \gamma \neq \delta \leq \epsilon \approx \zeta \\
+&\sum_{i=1}^{n} x_i^2 + \prod_{j=1}^{m} y_j^2 = \int_{a}^{b} f(x)\,dx \\
+&\lim_{n\to\infty} \frac{1}{n} = 0, \qquad
+\nabla \cdot \vec{E} = \frac{\rho}{\varepsilon_0} \\
+&A = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}, \qquad
+B = \begin{bmatrix} b_1 \\ b_2 \end{bmatrix} \\
+&S = \{ x \mid x > 0 \}, \qquad
+f: X \to Y, \qquad
+x \mapsto f(x) \\
+&\bigcup_{i=1}^n A_i \cap \bigcap_{j=1}^m B_j, \qquad
+A \subseteq B, \quad A \supset B \\
+&\mathcal{L} = \mathcal{F}(\mathbb{R}), \qquad
+\mathfrak{g} \cong \mathfrak{h} \\
+&\boxed{E = mc^2}
+\end{aligned}
+\]
 
 \begin{theorem}[Residue
 Theorem]\protect\hypertarget{thm-residue}{}\label{thm-residue}

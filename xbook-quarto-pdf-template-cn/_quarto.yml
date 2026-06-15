@@ -1,6 +1,11 @@
 project:
   output-dir: .
 
-formats:
+format:
   xbook-cn-pdf:
     pdf-engine: xelatex
+    keep-tex: true
+    mainfont: "TeX Gyre Pagella"
+    CJKmainfont: "Kaiti SC"
+    CJKsansfont: "Noto Sans SC"
+    CJKmonofont: "Noto Sans SC"
