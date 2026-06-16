@@ -65,14 +65,14 @@ $$
 Let $f$ be analytic in a simply connected domain $D$. Then for any closed contour $\gamma \subset D$,
 $$
 \oint_\gamma f(z)\,dz = 2\pi i \sum_{k} \mathrm{Res}(f, z_k)
-$$
+$${#eq-einstein}
 :::
 
 This template supports standard Quarto cross-references. You can refer to Theorem [@thm-residue] in the text.
 
 # Markdown Basics {#sec-markdown}
 
-The template is built on Quarto and Pandoc, leveraging standard LaTeX tools for PDF output.
+The template is built on Quarto and Pandoc, @eq-einstein leveraging standard LaTeX tools for PDF output.
 
 ## Equations
 

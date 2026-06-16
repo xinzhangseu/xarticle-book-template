@@ -11,3 +11,5 @@ format:
     CJKmonofont: "Noto Sans SC"
     #mathfont: "mlmodern"
 
+crossref:
+  eq-prefix: ""

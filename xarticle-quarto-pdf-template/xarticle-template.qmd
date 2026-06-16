@@ -1,24 +1,26 @@
 ---
 title: A Sample Article Using Quarto with Standard LaTeX Article Class
-
+format:
+  xarticle-pdf:
+    keep-tex: true
 author:
   - id: xz
-    name: Your Name
+    name: Xin Zhang
     affiliations:
-      - name: Your University
-        department: Your Department
-        city: Your City
-        country: Your Country
-        postal-code: 000000
-    orcid: 0000-0000-0000-0001
-    email: your.email@university.edu
-    url: https://your-university.edu/your-profile
+      - name: Southeast University
+        department: School of Mathematics
+        city: Nanjing
+        country: China
+        postal-code: 211189
+    orcid: 0000-0001-6670-5351
+    email: xzhangseu@seu.edu.cn
+    url: https://math.seu.edu.cn/zx_en/list.htm
     attributes:
       corresponding: true
     bio: |
       Author biography text goes here.
   - name: John Doe
-    affiliations:
+    affiliations: 
       - name: Anonymous University
     bio: |
       Author biography text goes here.
@@ -33,10 +35,14 @@ date: 2023-06-23
 
 # Introduction {#sec-intro}
 
-This file is a sample article demonstrating Quarto's capabilities with the standard
+中国人民This file is a sample article demonstrating Quarto's capabilities with the standard
 LaTeX `article` document class. It supports PDF (via LaTeX) output.
 It is assumed that the reader has a basic working knowledge of stochastic calculus @karatzas1991brownian
 and stochastic control theory @yong1999sch.
+
+
+
+
 
 
 $$
@@ -61,6 +67,50 @@ A \subseteq B, \quad A \supset B \\
 $$
 
 
+::: {#def-continuous}
+
+## 连续性
+
+设函数 $f: D \subseteq \mathbb{R} \to \mathbb{R}$，$x_0 \in D$。如果对于任意 $\epsilon > 0$，存在 $\delta > 0$，使得当 $|x - x_0| < \delta$ 且 $x \in D$ 时，有 $|f(x) - f(x_0)| < \epsilon$，则称 $f$ 在 $x_0$ 处连续。
+
+:::
+
+### 定理环境
+
+::: {#thm-mvt}
+
+## 中值定理
+
+设函数 $f: [a,b] \to \mathbb{R}$ 连续，在 $(a,b)$ 内可导。则存在 $\xi \in (a,b)$，使得
+
+$$
+f'(\xi) = \frac{f(b) - f(a)}{b - a}
+$${#eq-einstein}
+
+:::
+
+参考定理 @thm-mvt 可知...
+
+### 引理环境
+
+::: {#lem-fermat}
+
+## 费马引理
+
+设函数 $f$ 在 $x_0$ 处可导，由公式 @eq-einstein 知 $x_0$ 是 $f$ 的极值点，则 $f'(x_0) = 0$。
+
+:::
+
+### 推论环境
+
+::: {#cor-zero}
+
+## 导数零点定理
+
+若函数 $f$ 在区间 $I$ 上可导且 $f'(x) = 0$ 对所有 $x \in I$ 成立，则 $f$ 在 $I$ 上为常数函数。
+
+:::
+
 ::: {#thm-residue .theorem}
 ## Residue Theorem
 Let $f$ be analytic in a simply connected domain $D$. Then for any closed contour $\gamma \subset D$,
@@ -68,8 +118,6 @@ $$
 \oint_\gamma f(z)\,dz = 2\pi i \sum_{k} \mathrm{Res}(f, z_k)
 $$
 :::
-
-中文测试
 
 This template supports standard Quarto cross-references. You can refer to Theorem [@thm-residue] in the text.
 

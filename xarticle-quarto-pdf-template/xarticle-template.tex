@@ -175,6 +175,22 @@
 %%\setCJKmonofont{Noto Sans SC}
 
 \punctstyle{banjiao}
+%------------------------------------------------------------------------------
+% 17. Equation reference parentheses — Quarto 对公式交叉引用使用 \ref
+%     而非 \eqref，导致编号不带括号。AtBeginDocument 在 hyperref 加载后执行，
+%     确保 \ref 重定义生效（覆盖 hyperref 版本）。
+%------------------------------------------------------------------------------
+\usepackage{xstring}
+\AtBeginDocument{%
+  \let\quartoOldRef\ref
+  \renewcommand{\ref}[1]{%
+    \IfBeginWith{#1}{eq-}{%
+      \textup{(\quartoOldRef{#1})}%
+    }{%
+      \quartoOldRef{#1}%
+    }%
+  }%
+}
 % Theorem boxes — rounded corners, white/transparent background
 \usepackage[most,theorems,skins,breakable]{tcolorbox}
 
@@ -241,14 +257,14 @@
 \floatname{codelisting}{Listing}
 \newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
 \theoremstyle{plain}
 \newtheorem{corollary}{Corollary}[section]
 \theoremstyle{plain}
 \newtheorem{lemma}{Lemma}[section]
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{Proof}}
 \newtheorem*{remark}{Remark}
@@ -267,7 +283,7 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={A Sample Article Using Quarto with Standard LaTeX Article Class},
-  pdfauthor={Your Name; John Doe},
+  pdfauthor={Xin Zhang; John Doe},
   pdfkeywords={Quarto, LaTeX, article, Pandoc, template},
   colorlinks=true,
   linkcolor={blue},
@@ -280,10 +296,9 @@
 \title{\Large A Sample Article Using Quarto with Standard LaTeX Article
 Class}
 
-\author{\href{https://your-university.edu/your-profile}{Your
-Name}\footnote{Corresponding author: Your Department, Your
-University, Your City, 0, Your
-Country. E-mail: \texttt{your.email@university.edu}}\,~\orcidlink{0000-0000-0000-0001}\hspace{2em}John
+\author{\href{https://math.seu.edu.cn/zx\_en/list.htm}{Xin
+Zhang}\footnote{Corresponding author: School of Mathematics, Southeast
+University, Nanjing, 211189, China. E-mail: \texttt{xzhangseu@seu.edu.cn}}\,~\orcidlink{0000-0001-6670-5351}\hspace{2em}John
 Doe\footnote{Anonymous University}}
 
 \date{\small 2023-06-23}
@@ -302,11 +317,12 @@ writing.}
 
 \section{Introduction}\label{sec-intro}
 
-This file is a sample article demonstrating Quarto's capabilities with
-the standard LaTeX \texttt{article} document class. It supports PDF (via
-LaTeX) output. It is assumed that the reader has a basic working
-knowledge of stochastic calculus \citet{karatzas1991brownian} and
-stochastic control theory \citet{yong1999sch}.
+中国人民This file is a sample article demonstrating Quarto's
+capabilities with the standard LaTeX \texttt{article} document class. It
+supports PDF (via LaTeX) output. It is assumed that the reader has a
+basic working knowledge of stochastic calculus
+\citet{karatzas1991brownian} and stochastic control theory
+\citet{yong1999sch}.
 
 \[
 \begin{aligned}
@@ -329,6 +345,49 @@ A \subseteq B, \quad A \supset B \\
 \end{aligned}
 \]
 
+\begin{definition}[连续性]\protect\hypertarget{def-continuous}{}\label{def-continuous}
+
+设函数
+\(f: D \subseteq \mathbb{R} \to \mathbb{R}\)，\(x_0 \in D\)。如果对于任意
+\(\epsilon > 0\)，存在 \(\delta > 0\)，使得当 \(|x - x_0| < \delta\) 且
+\(x \in D\) 时，有 \(|f(x) - f(x_0)| < \epsilon\)，则称 \(f\) 在 \(x_0\)
+处连续。
+
+\end{definition}
+
+\subsubsection{定理环境}\label{ux5b9aux7406ux73afux5883}
+
+\begin{theorem}[中值定理]\protect\hypertarget{thm-mvt}{}\label{thm-mvt}
+
+设函数 \(f: [a,b] \to \mathbb{R}\) 连续，在 \((a,b)\) 内可导。则存在
+\(\xi \in (a,b)\)，使得
+
+\begin{equation}\protect\phantomsection\label{eq-einstein}{
+f'(\xi) = \frac{f(b) - f(a)}{b - a}
+}\end{equation}
+
+\end{theorem}
+
+参考定理 Theorem~\ref{thm-mvt} 可知\ldots{}
+
+\subsubsection{引理环境}\label{ux5f15ux7406ux73afux5883}
+
+\begin{lemma}[费马引理]\protect\hypertarget{lem-fermat}{}\label{lem-fermat}
+
+设函数 \(f\) 在 \(x_0\) 处可导，由公式 \ref{eq-einstein} 知 \(x_0\) 是
+\(f\) 的极值点，则 \(f'(x_0) = 0\)。
+
+\end{lemma}
+
+\subsubsection{推论环境}\label{ux63a8ux8bbaux73afux5883}
+
+\begin{corollary}[导数零点定理]\protect\hypertarget{cor-zero}{}\label{cor-zero}
+
+若函数 \(f\) 在区间 \(I\) 上可导且 \(f'(x) = 0\) 对所有 \(x \in I\)
+成立，则 \(f\) 在 \(I\) 上为常数函数。
+
+\end{corollary}
+
 \begin{theorem}[Residue
 Theorem]\protect\hypertarget{thm-residue}{}\label{thm-residue}
 
@@ -338,8 +397,6 @@ closed contour \(\gamma \subset D\), \[
 \]
 
 \end{theorem}
-
-中文测试
 
 This template supports standard Quarto cross-references. You can refer
 to Theorem Theorem~\ref{thm-residue} in the text.
@@ -447,7 +504,7 @@ you have a single appendix. Do not use
 
 
 \vspace*{18pt}
-\noindent\textbf{Your Name}\par
+\noindent\textbf{Xin Zhang}\par
 
 Author biography text goes here.\par
 \vspace*{18pt}

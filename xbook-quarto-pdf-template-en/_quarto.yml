@@ -9,3 +9,6 @@ format:
     CJKmainfont: "Kaiti SC"
     CJKsansfont: "Noto Sans SC"
     CJKmonofont: "Noto Sans SC"
+
+#crossref:
+  #eq-prefix: ""

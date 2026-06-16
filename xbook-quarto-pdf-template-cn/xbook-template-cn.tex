@@ -208,6 +208,23 @@
 %%\setCJKsansfont{Noto Sans SC}
 %%\setCJKmonofont{Noto Sans SC}
 \punctstyle{banjiao}
+
+%------------------------------------------------------------------------------
+% 17. Equation reference parentheses — Quarto 对公式交叉引用使用 \ref
+%     而非 \eqref，导致编号不带括号。AtBeginDocument 在 hyperref 加载后执行，
+%     确保 \ref 重定义生效（覆盖 hyperref 版本）。
+%------------------------------------------------------------------------------
+\usepackage{xstring}
+\AtBeginDocument{%
+  \let\quartoOldRef\ref
+  \renewcommand{\ref}[1]{%
+    \IfBeginWith{#1}{eq-}{%
+      \textup{(\quartoOldRef{#1})}%
+    }{%
+      \quartoOldRef{#1}%
+    }%
+  }%
+}
 % Theorem boxes — rounded corners, white/transparent background
 \usepackage[most,theorems,skins,breakable]{tcolorbox}
 
@@ -275,13 +292,13 @@
 \newcommand*\listoflistings{\listof{codelisting}{列表索引}}
 \usepackage{amsthm}
 \theoremstyle{plain}
-\newtheorem{lemma}{引理}[section]
+\newtheorem{theorem}{定理}[section]
 \theoremstyle{plain}
 \newtheorem{corollary}{推论}[section]
-\theoremstyle{plain}
-\newtheorem{theorem}{定理}[section]
 \theoremstyle{definition}
 \newtheorem{definition}{定义}[section]
+\theoremstyle{plain}
+\newtheorem{lemma}{引理}[section]
 \theoremstyle{remark}
 \AtBeginDocument{\renewcommand*{\proofname}{证明}}
 \newtheorem*{remark}{注记}
@@ -384,19 +401,20 @@ A \subseteq B, \quad A \supset B \\
 Theorem]\protect\hypertarget{thm-residue}{}\label{thm-residue}
 
 Let \(f\) be analytic in a simply connected domain \(D\). Then for any
-closed contour \(\gamma \subset D\), \[
+closed contour \(\gamma \subset D\),
+\begin{equation}\protect\phantomsection\label{eq-einstein}{
 \oint_\gamma f(z)\,dz = 2\pi i \sum_{k} \mathrm{Res}(f, z_k)
-\]
+}\end{equation}
 
 \end{theorem}
 
 This template supports standard Quarto cross-references. You can refer
-to 定理 定理~\ref{thm-residue} in the text.
+to Theorem 定理~\ref{thm-residue} in the text.
 
 \chapter{Markdown Basics}\label{sec-markdown}
 
-The template is built on Quarto and Pandoc, leveraging standard LaTeX
-tools for PDF output.
+The template is built on Quarto and Pandoc, \ref{eq-einstein} leveraging
+standard LaTeX tools for PDF output.
 
 \section{Equations}\label{equations}
 
